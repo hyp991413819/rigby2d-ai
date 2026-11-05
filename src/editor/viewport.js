@@ -15,6 +15,7 @@ import { MeshTool } from './meshtool.js';
 import { ShapeTool } from './shapetool.js';
 import { GLOW_COLORS } from './draworderdnd.js';
 import { h, popupMenu } from './widgets.js';
+import { translateUiText } from './i18n.js';
 
 const SELECTED = 'rgb(255,170,40)';
 const BONE = 'rgb(110,200,230)';
@@ -893,12 +894,12 @@ export class Viewport {
 
   drawOverlay() {
     const app = this.app;
-    let text = 'SETUP';
+    let text = translateUiText('SETUP');
     if (app.mode === Mode.Animate) {
-      const at = has(app, 'timecode') ? timecode(app.time, FPS) : `frame ${Math.round(app.time * FPS)}`;
-      text = `ANIMATE · ${app.currentAnimation()?.name ?? ''} · ${at}`;
+      const at = has(app, 'timecode') ? timecode(app.time, FPS) : translateUiText(`frame ${Math.round(app.time * FPS)}`);
+      text = `${translateUiText('ANIMATE')} · ${app.currentAnimation()?.name ?? ''} · ${at}`;
     }
-    text += `   ${TOOLS.find((t) => t.id === app.tool)?.label ?? ''}`;
+    text += `   ${translateUiText(TOOLS.find((tool) => tool.id === app.tool)?.label ?? '')}`;
     const ctx = this.ctx;
     // Shift clear of the rulers when guides are on, so the status text isn't hidden under them.
     const ox = app.guides.enabled ? RULER_W + 6 : 10;

@@ -8,6 +8,7 @@ import { BONE_CHANNELS } from '../core/animation.js';
 import { STEPPED, bezierFor, ease } from '../core/curve.js';
 import { FPS, Mode, snap } from './app.js';
 import { curveMenu, resortAnimation } from './timeline.js';
+import { translateUiText } from './i18n.js';
 
 const GUTTER = 170;
 const RULER = 22;
@@ -272,7 +273,7 @@ export class GraphEditor {
     ctx.fillStyle = 'rgb(150,150,150)';
     ctx.font = '11px system-ui, "Segoe UI", sans-serif';
     ctx.textBaseline = 'middle';
-    ctx.fillText(curves.length ? (this.range || this.timeRange ? 'Double-click: fit' : 'Curves') : 'No keyed bone channels', 8, RULER / 2);
+    ctx.fillText(curves.length ? (this.range || this.timeRange ? translateUiText('Double-click: fit') : translateUiText('Curves')) : translateUiText('No keyed bone channels'), 8, RULER / 2);
     this.rows = [];
     curves.forEach((cv, r) => {
       const y = RULER + r * ROW;

@@ -40,7 +40,7 @@ import { LINKS, VERSION, openAbout, openShortcuts, openSupporters } from './help
 import { installRecovery } from './recoveryui.js';
 import { applyInterfaceScale, openPreferences } from './prefsui.js';
 import { AddonManager } from './addonui.js';
-import { languageFor, setLanguage, t } from './i18n.js';
+import { languageFor, setLanguage, t, translateUiText } from './i18n.js';
 import { openRuntimes } from './runtimeui.js';
 import { checkForUpdates, scheduleUpdateCheck, updateBadge } from './updateui.js';
 import { openWelcome } from './welcomeui.js';
@@ -347,7 +347,7 @@ function buildMenuBar() {
     const state = `${app.mode}|${app.workspace}|${app.keymap}|${document.documentElement.lang}`;
     if (state === shown) return;
     shown = state;
-    mode.textContent = app.mode === Mode.Setup ? 'SETUP' : 'ANIMATE';
+    mode.textContent = app.mode === Mode.Setup ? translateUiText('SETUP') : translateUiText('ANIMATE');
     mode.className = `mode ${app.mode}`;
     mode.title = `Switch Setup / Animate${sc('mode.toggle') ? ` (${sc('mode.toggle')})` : ''}`;
     Object.keys(WORKSPACES).forEach((id, i) => {
