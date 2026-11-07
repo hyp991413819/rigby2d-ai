@@ -13,6 +13,7 @@ import { h } from './widgets.js';
 import { renderAddonsPage } from './addonui.js';
 import { LANGUAGES, t } from './i18n.js';
 import { icon } from './icons.js';
+import { buildApiSettings, resetApiConfig } from './aiimageui.js';
 
 /** Applies the interface scale (desktop: the window's zoom, like Blender's resolution scale). */
 export async function applyInterfaceScale(app) {
@@ -148,6 +149,11 @@ const PAGES = [
       isDesktop ? row('Reopen the last project', 'Opens the most recent project when the editor starts.', checkbox(app.prefs.get('files.reopenLast'), (v) => app.prefs.set('files.reopenLast', v))) : null,
     ],
   },
+  {
+    id: 'aiimage',
+    label: 'AI image generation',
+    render: () => [buildApiSettings()],
+  },
   { id: 'addons', label: 'Add-ons' },
 ];
 
@@ -169,7 +175,7 @@ export function openPreferences(app, addons, page = current) {
     if (id === 'addons') offAddons = renderAddonsPage(addons, content);
     else content.append(...def.render(app).filter(Boolean));
   };
-  const ICONS = { general: 'settings-2', interface: 'monitor', editing: 'keyboard', files: 'save', addons: 'puzzle' };
+  const ICONS = { general: 'settings-2', interface: 'monitor', editing: 'keyboard', files: 'save', aiimage: 'sparkles', addons: 'puzzle' };
   for (const p of PAGES) nav.append(h('button', { 'data-page': p.id, onclick: () => show(p.id) }, icon(ICONS[p.id], 16), h('span', null, t(p.label))));
   const reset = h(
     'button',
@@ -177,6 +183,11 @@ export function openPreferences(app, addons, page = current) {
       class: 'prefs-reset',
       title: t('Put the preferences on this page back to their defaults'),
       onclick: () => {
+        if (current === 'aiimage') {
+          resetApiConfig();
+          show(current);
+          return;
+        }
         const prefix = { general: 'general.', interface: 'interface.', editing: 'editing.', files: 'files.' }[current];
         if (!prefix) return;
         for (const key of Object.keys(PREFS)) if (key.startsWith(prefix)) app.prefs.reset(key);

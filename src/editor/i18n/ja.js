@@ -2,6 +2,7 @@
 // Interface text in Japanese (see i18n.js). Keys are the English text.
 
 export default {
+  "AI image generation": "AI 画像生成",
   "A .rigby work file, or a skeleton .json / .skel": ".rigby 作業ファイル、またはスケルトン .json / .skel",
   "A RigbySkeleton component for 2D scenes: drop in the exported files and pick an animation.": "2D シーン用の RigbySkeleton コンポーネント。書き出したファイルを入れて、アニメーションを選ぶだけです。",
   "A report of the recent errors, to copy or post": "最近のエラーのレポート（コピーまたは投稿用）",

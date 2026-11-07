@@ -10,6 +10,7 @@ src-tauri/gen/schemas/
 .DS_Store
 
 # Third-party binaries must never be committed
+public/models/
 *.exe
 *.msi
 *.dmg

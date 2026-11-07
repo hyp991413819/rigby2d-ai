@@ -2,6 +2,7 @@
 // Interface text in Korean (see i18n.js). Keys are the English text.
 
 export default {
+  "AI image generation": "AI 이미지 생성",
   "A .rigby work file, or a skeleton .json / .skel": ".rigby 작업 파일 또는 스켈레톤 .json / .skel",
   "A RigbySkeleton component for 2D scenes: drop in the exported files and pick an animation.": "2D 씬용 RigbySkeleton 컴포넌트: 내보낸 파일을 넣고 애니메이션을 고르기만 하면 됩니다.",
   "A report of the recent errors, to copy or post": "최근 오류 보고서(복사하거나 게시)",

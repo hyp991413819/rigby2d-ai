@@ -33,6 +33,7 @@
     "build": "tauri build",
     "tauri": "tauri",
     "web:dev": "vite",
+    "fetch:matting": "node scripts/fetch-matting-model.mjs",
     "web:build": "vite build",
     "test": "node --test \"test/*.test.js\"",
     "build:mcpb": "node mcpb/build.mjs",

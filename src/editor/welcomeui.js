@@ -4,7 +4,8 @@
 
 import { DEMOS } from './demos.js';
 import { LINKS, VERSION } from './helpui.js';
-import { language, t } from './i18n.js';
+import { language, t, translateUiText as tr } from './i18n.js';
+import { openTemplateLibrary } from './templatelibui.js';
 import { isDesktop, openExternal, saveDownload } from './platform.js';
 import { ago, recentProjects, splitPath } from './recent.js';
 import { newScene } from './sceneui.js';
@@ -129,6 +130,7 @@ export function openWelcome(app, { tutorials, whatsNew, onClose } = {}) {
         action('plus', t('New game project'), t('Characters for games'), () => app.newDocument('game')),
         action('plus', t('New film project'), t('Animation rendered to video'), () => app.newDocument('film')),
         action('folder-open', t('Open…'), t('A .rigby work file, or a skeleton .json / .skel'), () => app.openDialog()),
+        action('sparkles', tr('Spine animation templates') + '…', tr('Reuse skeleton and animations with a new look'), () => openTemplateLibrary(app)),
         h('h4', null, t('Learn')),
         tutorials ? action('play', t('Take the tour'), t('Four minutes around the editor'), () => tutorials.tour()) : null,
         tutorials ? action('graduation-cap', t('Tutorials'), t('Lessons from drawing to moving character'), () => tutorials.open()) : null,

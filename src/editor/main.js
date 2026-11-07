@@ -30,6 +30,8 @@ import { toggleLogWindow, windowOpen as logOpen } from './logwindow.js';
 import { Scripts } from './scripting/scriptui.js';
 import { createTutorials } from './tutorials/index.js';
 import { openAiConnect } from './aiconnect.js';
+import { openAiImagePanel } from './aiimageui.js';
+import { openTemplateLibrary } from './templatelibui.js';
 import { installPanelSync } from './panelsync.js';
 import { windowLayoutsMenuItem } from './layoutui.js';
 import { openDemoPicker } from './demoui.js';
@@ -112,11 +114,13 @@ function menus() {
         { label: t('PSD…'), action: () => app.importPsd() },
         { label: t('SVG…'), title: t('An Inkscape, Affinity or Illustrator drawing: each layer becomes a part, placed where it was drawn'), action: () => app.importSvg() },
         { label: t('PNG images…'), action: () => app.importImages() },
+        { label: translateUiText('AI Image Generation…'), title: translateUiText('Generate image assets with a text-to-image model'), action: () => openAiImagePanel(app, { openPrefs: () => showPreferences('aiimage') }) },
         ...(has(app, 'audio') ? [{ label: t('Audio…'), action: () => app.importAudio() }] : []),
         'separator',
         { label: t('Check a skeleton file…'), title: t('What a skeleton .json or .skel holds, and how it carries over to Rigby2D'), action: () => openMigrationCheck(app) },
       ]),
       { label: t('AutoRig artwork…'), action: () => openAutoRig(app) },
+      { label: translateUiText('Spine animation templates') + '…', action: () => openTemplateLibrary(app) },
       { label: t('Retarget animations…'), title: t('Copy animations from another character onto this one'), action: () => openRetarget(app) },
       'separator',
       // Film renders video; skeleton exports (for game engines) are in both workspaces.

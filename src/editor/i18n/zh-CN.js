@@ -2,6 +2,7 @@
 // Interface text in Simplified Chinese (see i18n.js). Keys are the English text.
 
 export default {
+  "AI image generation": "AI 图像生成",
   "A .rigby work file, or a skeleton .json / .skel": ".rigby 工作文件，或骨骼 .json / .skel",
   "A RigbySkeleton component for 2D scenes: drop in the exported files and pick an animation.": "用于 2D 场景的 RigbySkeleton 组件：放入导出的文件，选择动画即可。",
   "A report of the recent errors, to copy or post": "最近错误的报告，可复制或提交",

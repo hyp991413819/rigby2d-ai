@@ -26,9 +26,10 @@ export const LINKS = {
 
 /**
  * A modal dialog; returns { body, close }. Escape and a click outside close it; `onClose` runs
- * however it closes.
+ * however it closes. Pass `dismissible: false` for full-screen panels that must only close
+ * through their close button.
  */
-export function dialog(className, title, subtitle, { onClose } = {}) {
+export function dialog(className, title, subtitle, { onClose, dismissible = true } = {}) {
   const overlay = h('div', { class: 'modal-backdrop' });
   const close = () => {
     if (!overlay.isConnected) return;
@@ -37,7 +38,7 @@ export function dialog(className, title, subtitle, { onClose } = {}) {
     onClose?.();
   };
   const onKey = (e) => {
-    if (e.key !== 'Escape') return;
+    if (!dismissible || e.key !== 'Escape') return;
     // With a dialog opened from another (Preferences ▸ Customize…), Escape closes only the top one.
     const backdrops = document.querySelectorAll('.modal-backdrop');
     if (backdrops[backdrops.length - 1] !== overlay) return;
@@ -45,7 +46,7 @@ export function dialog(className, title, subtitle, { onClose } = {}) {
     close();
   };
   const body = h('div', { class: 'dialog-body' });
-  overlay.addEventListener('pointerdown', (e) => e.target === overlay && close());
+  if (dismissible) overlay.addEventListener('pointerdown', (e) => e.target === overlay && close());
   overlay.append(
     h(
       'div',
@@ -54,7 +55,7 @@ export function dialog(className, title, subtitle, { onClose } = {}) {
         'header',
         { class: 'dialog-head' },
         h('div', null, h('h3', null, title), subtitle ? h('p', { class: 'dialog-sub' }, subtitle) : null),
-        h('button', { class: 'dialog-close', title: 'Close (Esc)', 'aria-label': 'Close', onclick: close }, '✕'),
+        h('button', { class: 'dialog-close', title: dismissible ? 'Close (Esc)' : 'Close', 'aria-label': 'Close', onclick: close }, '✕'),
       ),
       body,
     ),

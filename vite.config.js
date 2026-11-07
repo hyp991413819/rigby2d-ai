@@ -39,7 +39,21 @@ export default defineConfig({
   resolve: { alias: { '@demo-sources': demoSources } },
   plugins: [pyodideAssets()],
   worker: { format: 'es' },
-  server: { port: 1420, strictPort: true, watch: { ignored: ['**/src-tauri/**'] } },
+  server: {
+    port: 1420,
+    strictPort: true,
+    watch: { ignored: ['**/src-tauri/**'] },
+    // SenseNova's image API fails the browser's CORS preflight. The browser editor calls the
+    // same-origin /sensenova/* path and the dev server forwards it; the desktop app calls the
+    // API directly through the Tauri HTTP plugin.
+    proxy: {
+      '/sensenova': {
+        target: 'https://token.sensenova.cn',
+        changeOrigin: true,
+        rewrite: (p) => p.replace(/^\/sensenova/, ''),
+      },
+    },
+  },
   envPrefix: ['VITE_', 'TAURI_ENV_'],
   build: {
     target: 'es2021',

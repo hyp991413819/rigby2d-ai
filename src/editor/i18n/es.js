@@ -2,6 +2,7 @@
 // Interface text in Spanish (see i18n.js). Keys are the English text.
 
 export default {
+  "AI image generation": "Generación de imágenes con IA",
   "A .rigby work file, or a skeleton .json / .skel": "Un archivo de trabajo .rigby, o un esqueleto .json / .skel",
   "A RigbySkeleton component for 2D scenes: drop in the exported files and pick an animation.": "Un componente RigbySkeleton para escenas 2D: añade los archivos exportados y elige una animación.",
   "A report of the recent errors, to copy or post": "Un informe de los errores recientes, para copiar o publicar",
